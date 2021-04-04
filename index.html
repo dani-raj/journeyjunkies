@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Journey Junkies</title>
+    <link rel="icon" type="image/png" href="/images/favicon.ico"/>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="menu-toggle">
+                    <i class="fas fa-bars menu-icon"></i>
+                    <i class="fas fa-times closing-icon"></i>
+                </div>
+                <div class="brand">
+                    <a href="#" class="nav-logo">Journey Junkies</a>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#header" class="nav-item">Home</a></li>
+                    <li><a href="#about" class="nav-item" >About</a></li>
+                    <li><a href="#gallery" class="nav-item">Gallery</a></li>
+                    <li><a href="#tours" class="nav-item">Tours</a></li>
+                    <li><a href="#testimonials" class="nav-item">Reviews</a></li>
+                    <li><a href="#contact" class="nav-item">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="headline">A land of 7000 islands</h1>
+                <p class="subheadline">Discover the Philippines with the best overnight island-hopping tours</p>
+                <a href="#contact"><button class="hero-btn btn">Book now</button></a>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="about">
+        <div class="container">
+            <div class="about-cards">
+                <div class="about-card">
+                    <div class="about-text-box">
+                        <h2 class="about-card-title">The tastes worth taking a long-haul flight</h2>
+                        <p class="about-paragraph">
+                            Filipino cuisine is just as rich as its natural scenery. 
+                            With their influences throughout their history and their traditional cooking techniques,
+                             Filipinos tend to combine flavours and make the most of any ingredients. Our trips not only introduce you
+                             to the most beautiful places of the country but also to its most delicious meals. Hungry yet?
+                        </p>
+                    </div>
+                    <div class="about-img-box">
+                        <img src="images/food.jpg" alt="" class="about-image">
+                    </div>
+                </div>
+                <div class="about-card reversed">
+                    <div class="about-text-box">
+                        <h2 class="about-card-title">An underwater world that takes your breath away</h2>
+                        <p class="about-paragraph">Watching David Attenborough documentaries are nice,
+                             but why not make your own discoveries? From the giant whale shark to the tiny clown fish,
+                             the Philippines never fails to amaze anyone going underwater. It’s also home to one of the
+                             few biggest coral reefs.</p>
+                    </div>
+                    <div class="about-img-box">
+                        <img src="images/diving.jpg" alt="" class="about-image">
+                    </div>
+                </div>
+                <div class="about-card">
+                    <div class="about-text-box">
+                        <h2 class="about-card-title">Ever wondered what you would bring to a deserted island?</h2>
+                        <p class="about-paragraph">Now is the time to answer that. <br>
+                            Spend a night on a real deserted island and let your worries get washed away
+                            as the ocean gently reaches your feet. Our camp awaits you with the comfort of a luxurious hotel
+                            and the nomad experience of a thousand years. But before you let your inner Robinson Cruso come alive,
+                            let us tell you that meals are also provided by our Michellin-star chef.
+                             </p>
+                    </div>
+                    <div class="about-img-box">
+                        <img src="images/camp.jpg" alt="" class="about-image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery">
+        <div class="container">
+           <div id="image-gallery">
+                <div class="image-container img-1">
+                    <img src="images/gallery01.jpg" class="image" id="img1">
+                </div>
+                <div class="image-container img-2">
+                    <img src="images/gallery02.jpg" class="image" id="img2">
+                </div>
+                <div class="image-container img-3">
+                    <img src="images/gallery03.jpg" class="image" id="img3">
+                </div>
+                <div class="image-container img-4">
+                    <img src="images/gallery04.jpg" class="image" id="img4">
+                </div>
+                <div class="image-container img-5">
+                    <img src="images/gallery05.jpg" class="image" id="img5">
+                </div>
+                <div class="image-container img-6">
+                    <img src="images/gallery06.jpg" class="image" id="img6">
+                </div>
+                <div class="image-container img-7">
+                    <img src="images/gallery07.jpg" class="image" id="img7">
+                </div>
+                <div class="image-container img-8">
+                    <img src="images/gallery08.jpg" class="image" id="img8">
+                </div>
+            </div>
+        </div>
+        <div class="pop-up-gallery" id="pop-up-gallery">
+            <div class="selected-img" id="selected-img" style="color: black; text-align: center; font-size: 2rem">
+            </div>
+            <i class="fas fa-times-circle exit-gallery-btn" id="exit-gallery-btn"></i>
+            <i class="fas fa-chevron-circle-right next-arrow arrow"></i>
+            <i class="fas fa-chevron-circle-left previous-arrow arrow"></i>
+            <p id="image-num-count">1/8</p>
+        </div>
+    </section> 
+
+    <section id="tours">
+        <div class="container">
+            <h3 class="tours-title title">Our Tours</h3>
+            <div class="tours-boxes">
+                <div class="tour palawan">
+                    <div class="tour-content">
+                        <h4 class="tour-title">Palawan</h4>
+                        <p class="tour-description">Located between the South China Sea and the Sulu Sea,
+                             Palawan has some of the most beautiful beaches of the world. Whether you’d like
+                              to watch the night sky on a deserted island or party in a crowded bar, Palawan is for you.</p>
+                        <ul class="tour-destinations">
+                            <li>Coron</li>
+                            <li>Apo Island</li>
+                            <li>El Nido</li>
+                        </ul>
+                        <p class="tour-price">$220</p>
+                        <a href="#contact"><button class="tour-btn btn" id="palawan">Apply now</button></a>
+                    </div>
+                </div>
+                <div class="tour cebu">
+                    <div class="tour-content ">
+                        <p class="most-popular">Most popular</p>
+                        <h4 class="tour-title">Cebu</h4>
+                        <p class="tour-description">Being at the center of the Visayas, Cebu holds many options for all types of travelers.
+                             Discover the quiet and slow river of Bohol or get lost in the exciting markets of Cebu City.</p>
+                        <ul class="tour-destinations">
+                            <li>Cebu city</li>
+                            <li>Bohol</li>
+                            <li>Siquijor Island</li>
+                        </ul>
+                        <p class="tour-price">$250</p>
+                        <a href="#contact"><button class="tour-btn btn" id="cebu">Apply now</button></a>
+                    </div>
+                </div>
+                <div class="tour siargao">
+                    <div class="tour-content">
+                        <h4 class="tour-title">Siargao</h4>
+                        <p class="tour-description">Siargao is becoming one of the most popular islands of the Philippines due
+                             to its sandy beaches, posh restaurants and big waves perfect for surfers.</p>
+                        <ul class="tour-destinations">
+                            <li>Dinagat</li>
+                            <li>Laswitan Lagoon</li>
+                            <li>Siargao Island</li>
+                        </ul>
+                        <p class="tour-price">$200</p>
+                        <a href="#contact"><button class="tour-btn btn" id="siargao">Apply now</button></a>
+                </div>
+            </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials">
+        <div class="container">
+            <div class="testimonial">
+                <div class="testimonial-text-box box1">
+                    <p class="testimonial-text">"It's a must for everyone visiting the Philippines."</p>
+                    <img src="./images/profile01.jpg">
+                    <p class="testimonial-name">@danii.raj</p>
+                </div>
+                <div class="testimonial-text-box box2">
+                    <p class="testimonial-text">"The team was super friendly and our accomodation just couldn't get any better."</p>
+                    <img src="./images/profile02.jpg">
+                    <p class="testimonial-name">@leona_field</p>
+                </div>
+                <div class="testimonial-text-box box3">
+                    <p class="testimonial-text">"Great people, great vibes, great memories!"</p>
+                    <img src="./images/profile03.jpg">
+                    <p class="testimonial-name">@mattthetraveler</p>
+                </div>
+                <div class="testimonial-text-box box4">
+                    <p class="testimonial-text">"It's definitely worth the price!"</p>
+                    <img src="./images/profile06.jpg">
+                    <p class="testimonial-name">@itslilianfro</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h4 class="contact-title title">Book your trip now!</h4>
+            <form action="#" id="contact-form">
+                <div class="form-control">
+                    <label for="name">Name</label>
+                    <input type="text" id="name">
+                    <small>Error message</small>
+                </div>
+                <div class="form-control">
+                    <label for="email">Email</label>
+                    <input type="email" id="email">
+                    <small>Error message</small>
+                </div>
+                <div class="form-control">
+                    <label for="tour">Select your tour</label>
+                    <select name="tour-options" id="tour-options">
+                        <option value="palawan" class="option">Palawan</option>
+                        <option value="cebu" class="option">Cebu</option>
+                        <option value="siargao" class="option">Siargao</option>
+                    </select>
+                </div>
+                <div class="form-control">
+                    <label for="date">When do you want to start your 4 days tour?</label>
+                    <input type="date" id="from-date">
+                    <small>Error message</small>
+                </div>
+                <div class="form-control">
+                    <label for="message">Enter your message here:</label>
+                    <textarea name="message" id="message" cols="30" rows="10"></textarea>
+                    <small>Error message</small>
+                </div>
+                <button type="submit" class="contact-btn btn">Send</button>
+            </form>
+        </div>
+        <div id="sent-msg">
+            <p><span>We have received your registration.</span>Our colleagues will contact you soon.</p>
+        </div>
+    </section>
+
+    <footer id="footer">
+        <div class="container">
+            <div class="footer-brand">
+                <a href="#" class="nav-logo-footer">Journey Junkies</a>
+            </div>
+            <div class="social-links">
+                <ul class="social-link-list">
+                    <li><a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a></li>
+                    <li><a href="#" class="social-link"><i class="fab fa-instagram"></i></a></li>
+                    <li><a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a></li>
+                    <li><a href="#" class="social-link"><i class="fab fa-tripadvisor"></i></a></li>
+                </ul>
+            </div>
+            <p class="copyright">&#169 Copyright 2021</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
