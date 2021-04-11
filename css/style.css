@@ -254,7 +254,6 @@ nav{
 
 .about-image{
     max-width: 50rem;
-    min-width: 30rem;
     object-fit: cover;
 }
 
@@ -911,10 +910,52 @@ nav{
 }
 
 @media screen and (max-width: 376px) {
-    #contact-form{
-        max-width: 30rem;
+    .subheadline {
+        max-width: 25rem;
     }
-}
+    .tour{
+        width: 25rem;
+    }
+    .tour-destinations li {
+        margin: 1rem 2rem;
+    }
+    .testimonial-text {
+        font-size: 3rem;
+    }
+    #contact-form{
+        max-width: 27rem;
+    }
+    .about-img-box, .about-image {
+        width: 25rem;
+    }
+    #sent-msg p {
+        font-size: 1.2rem;
+    }
+}    
+
+
+@media screen and (max-width: 280px) {
+    .subheadline {
+        max-width: 20rem;
+    }
+    .about-cards {
+        padding: 1rem 3rem;
+    }
+    .tour{
+        width: 22rem;
+    }
+    #contact-form{
+        max-width: 22rem;
+        padding: 2rem 3rem;
+    }
+    .form-control small {
+        bottom: -4rem;
+    }
+    .about-img-box, .about-image {
+        width: 20rem;
+    }
+}    
+
 
 
 /* Animations */
