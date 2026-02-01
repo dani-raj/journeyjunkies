@@ -27,16 +27,15 @@ menuToggler.addEventListener('click', function(){
 
 // Navlinks can also hide the menu with a click on them
 navLink.addEventListener('click', function(){
-    body.classList.toggle('open');
+    body.classList.remove('open');
 })
 
 // To show the images in a bigger size, we give them an event listener that 
 // activates if we click on an image and if the browser window is bigger than 768px.
 // We have to get the 3rd character of the image's name, because their file names are like "img1" or "img6", and we only wan't to get the number.
 imageGallery.addEventListener('click', (e) => {
-    e.preventDefault() 
     if (e.target.classList.contains('image') && window.innerWidth >= 768) {
-        imageNum = parseInt(e.target.id.charAt(3))
+        imageNum = Number(e.target.id.slice(3));
         showFullImg(imageNum)
     }
 })
@@ -90,11 +89,12 @@ function exitPopUpGallery(event) {
 // Selecting a tour option by clicking 'Apply now" will set the selected tour option in the contact form.
 // And we also save it to the localStorage so if the user refreshes the page, the value won't get lost.
 tours.addEventListener('click', (e) => {
-    if (e.target.classList.contains("tour-btn")) {
-        localStorage.setItem('tour-selected', e.target.id)
-        selectedTour.value = e.target.id
-    }
-})
+  const btn = e.target.closest('.tour-btn');
+  if (!btn) return;
+
+  localStorage.setItem('tour-selected', btn.id);
+  selectedTour.value = btn.id;
+});
 
 // FROM VALIDATION
 form.addEventListener('submit', e => {
@@ -109,15 +109,17 @@ form.addEventListener('submit', e => {
 
 // Checking if the user sets the starting date of their booking with a valid date (past dates shouldn't be selected).
 startingDate.addEventListener('change', (e) => {
-    let startDate = e.target.value;
-    let selectedStartDate = new Date(startDate).toISOString().split('T')[0];
-    let today = new Date().toISOString().split('T')[0];
+  const selectedStartDate = e.target.value; // yyyy-mm-dd
+  const today = new Date().toISOString().split('T')[0];
 
-    if (selectedStartDate < today) {
-        setInvalid(startingDate, 'Please select a date that\'s not in the past')
-    }
-    localStorage.setItem('starting-date', selectedStartDate)
-})
+  if (selectedStartDate < today) {
+    setInvalid(startingDate, 'Please select a date that\'s not in the past');
+    return;
+  }
+
+  setValid(startingDate);
+  localStorage.setItem('starting-date', selectedStartDate);
+});
 
 // So when the page loads, it first checks if there's a selected tour in the localStorage. If there isn't, we set it to the default Cebu tour.
 // We also do the same with the starting date. If there isn't a date saved in localStorage, we set it to the current date.

@@ -627,13 +627,13 @@ nav{
     display: flex;
     flex-direction: column;
     position: relative;
+    margin-bottom: 2.5rem;
 }
 .form-control input,
 .form-control select,
 .form-control textarea {
   width: 100%;
   outline: none;
-  margin-bottom: 7rem;
   padding: .7rem;
   border: none;
   border-bottom: 1px solid rgba(0,0,0,.1);
@@ -666,17 +666,16 @@ nav{
 }
 
 .form-control small {
-    color: #ff1900;
-	position: absolute;
-	bottom: -3.5rem;
-    left: 0;
-    visibility: hidden;
-    font-size: 1.3rem;
-    border: none;
+  color: #ff1900;
+  visibility: hidden;
+  font-size: 1.3rem;
+  display: block;
+  margin-top: .6rem;
+  min-height: .6rem;
 }
 
-.form-control.invalid small{
-    visibility: visible;
+.form-control.invalid small {
+  visibility: visible;
 }
 
 #contact-form .btn{
