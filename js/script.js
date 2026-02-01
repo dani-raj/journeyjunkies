@@ -98,9 +98,14 @@ tours.addEventListener('click', (e) => {
 
 // FROM VALIDATION
 form.addEventListener('submit', e => {
-    e.preventDefault();
-    isValid();
-})
+  e.preventDefault();
+
+  if (isValid()) {
+    messageSentMsg.classList.add("show");
+    msgSent();
+    form.reset();
+  }
+});
 
 // Checking if the user sets the starting date of their booking with a valid date (past dates shouldn't be selected).
 startingDate.addEventListener('change', (e) => {
@@ -120,27 +125,31 @@ selectedTour.value = localStorage.getItem('tour-selected') !== null ? localStora
 startingDate.value = localStorage.getItem('starting-date') !== null ? localStorage.getItem('starting-date') : (new Date()).toISOString().split('T')[0];
 
 function isValid() {
-    //Removing whitespace
-    const usernameValue = username.value.trim();
-    const emailValue = email.value.trim();
+  let ok = true;
 
-    // If user tries to submit the form without giving us their name, we show an error message.
-    // But if there's a username, we remove error message. (if there was one)
-    if (usernameValue === '') {
-        setInvalid(username, 'Please share your name with us');
-    } else {
-        setValid(username)
-    }
+  const usernameValue = username.value.trim();
+  const emailValue = email.value.trim();
 
-    // We also check if they give us their e-mail address, and if it's a valid one.
-    if (emailValue === '') {
-        setInvalid(email, 'Don\'t forget to add your email address');
-    } else if (!checkEmail(emailValue)) {
-        setInvalid(email, 'That doesn\'t quite look like a valid email');
-    } else {
-        setValid(email);
-    }
+  if (usernameValue === '') {
+    setInvalid(username, 'Please share your name with us');
+    ok = false;
+  } else {
+    setValid(username);
+  }
+
+  if (emailValue === '') {
+    setInvalid(email, 'Don\'t forget to add your email address');
+    ok = false;
+  } else if (!checkEmail(emailValue)) {
+    setInvalid(email, 'That doesn\'t quite look like a valid email');
+    ok = false;
+  } else {
+    setValid(email);
+  }
+
+  return ok;
 }
+
 
 function checkEmail(email) {
 	return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -155,11 +164,9 @@ function setInvalid(input, message) {
 }
 
 // If every required input field is valid, we let the user know that their booking was successfull.
-function setValid(input, e) {
-	const formControl = input.parentElement;
-	formControl.classList.remove("invalid");
-    messageSentMsg.classList.add("show")
-    msgSent()
+function setValid(input) {
+  const formControl = input.parentElement;
+  formControl.classList.remove("invalid");
 }
 
 // After 5s we remove the message.
