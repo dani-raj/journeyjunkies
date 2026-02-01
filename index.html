@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Journey Junkies</title>
-    <link rel="icon" type="image/png" href="/images/favicon.ico"/>
+    <link rel="icon" href="images/favicon.ico">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
 </head>
@@ -223,7 +223,7 @@
                 </div>
                 <div class="form-control">
                     <label for="tour-options">Select your tour</label>
-                    <select name="tour-options" id="tour-options" name="tour">
+                    <select name="tour" id="tour-options">
                         <option value="palawan" class="option">Palawan</option>
                         <option value="cebu" class="option">Cebu</option>
                         <option value="siargao" class="option">Siargao</option>
@@ -231,12 +231,12 @@
                 </div>
                 <div class="form-control">
                     <label for="from-date">When do you want to start your 4 days tour?</label>
-                    <input type="date" id="from-date" name="formDate">
+                    <input type="date" id="from-date" name="fromDate">
                     <small>Error message</small>
                 </div>
                 <div class="form-control">
                     <label for="message">Enter your message here:</label>
-                    <textarea name="message" id="message" cols="30" rows="10" name="message"></textarea>
+                    <textarea name="message" id="message" cols="30" rows="10"></textarea>
                     <small>Error message</small>
                 </div>
                 <button type="submit" class="contact-btn btn">Send</button>
