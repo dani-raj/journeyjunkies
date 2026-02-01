@@ -683,6 +683,10 @@ nav{
     border: 1px solid var(--secondary-color);
     cursor: pointer;
     text-align: center;
+    color: var(--secondary-color);
+    background: var(--main-color);
+    -webkit-appearance: none;
+    appearance: none;
 }
 
 #contact-form .btn:hover{
