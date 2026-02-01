@@ -1,180 +1,224 @@
-let menuToggler = document.querySelector('.menu-toggle');
-let navLink = document.querySelector('.nav-links');
-let body = document.querySelector('body');
-let imageGallery = document.getElementById('image-gallery')
-let selectedImg = document.getElementById('selected-img')
-let popUpGallery = document.getElementById('pop-up-gallery')
-let imgCounter = document.getElementById('image-num-count')
-let arrow = document.getElementsByClassName('arrow');
-let arrowArr = Array.from(arrow);
-let exitBtn = document.getElementById('exit-gallery-btn');
-let tours = document.getElementById('tours');
-let selectedTour = document.getElementById('tour-options');
-let messageSentMsg = document.getElementById('sent-msg');
+// === DOM references ===
+const menuToggler = document.querySelector('.menu-toggle');
+const navLinks = document.querySelector('.nav-links');
+const imageGallery = document.getElementById('image-gallery');
+const selectedImg = document.getElementById('selected-img');
+const popUpGallery = document.getElementById('pop-up-gallery');
+const imgCounter = document.getElementById('image-num-count');
+const exitBtn = document.getElementById('exit-gallery-btn');
+const tours = document.getElementById('tours');
+const selectedTour = document.getElementById('tour-options');
+const messageSentMsg = document.getElementById('sent-msg');
 
 const form = document.getElementById('contact-form');
 const username = document.getElementById('name');
 const email = document.getElementById('email');
-const message = document.getElementById('message')
 const startingDate = document.getElementById('from-date');
+const body = document.body;
 
+// === State / constants ===
 let imageNum = 0;
+const MAX_IMAGES = 8;
 
-// Menu toggler can open and hide the menu with a click on it
-menuToggler.addEventListener('click', function(){
-    body.classList.toggle('open');
-})
+const STORAGE_TOUR_KEY = 'tour-selected';
+const STORAGE_DATE_KEY = 'starting-date';
 
-// Navlinks can also hide the menu with a click on them
-navLink.addEventListener('click', function(){
-    body.classList.remove('open');
-})
-
-// To show the images in a bigger size, we give them an event listener that 
-// activates if we click on an image and if the browser window is bigger than 768px.
-// We have to get the 3rd character of the image's name, because their file names are like "img1" or "img6", and we only wan't to get the number.
-imageGallery.addEventListener('click', (e) => {
-    if (e.target.classList.contains('image') && window.innerWidth >= 768) {
-        imageNum = Number(e.target.id.slice(3));
-        showFullImg(imageNum)
-    }
-})
-
-// First we set the pop-up gallery to visible and we set the selected image to be presented in a bigger size
-function showFullImg(imageNum) {
-    popUpGallery.classList.add('show')
-    selectedImg.innerHTML = `<img src="./images/gallery0${imageNum}.jpg"></img>`
-    imgCounter.innerHTML = `${imageNum}/8`
+// === Helpers ===
+function todayISO() {
+  return new Date().toISOString().split('T')[0]; // yyyy-mm-dd
 }
 
-// Users can get the previous or the next image of the gallery by whether clicking the arrow buttons or hitting the next/prev. keys.
-popUpGallery.addEventListener('click', event => getImage(event))
-document.addEventListener("keydown", event => getImage(event))
-
-// The function only works if the pop up gallery is being shown and if there is a previous/next image
-function getImage(event) {
-    if (popUpGallery.classList.contains("show")) {
-        if (event.code === 'ArrowRight' || event.target.classList.contains('next-arrow')) {
-            imageNum++
-            if (imageNum > 8) {
-                 imageNum = 8;
-            }
-            showFullImg(imageNum)
-        } else if (event.code === 'ArrowLeft' || event.target.classList.contains('previous-arrow')) {
-            imageNum--
-             if (imageNum < 1) {
-                 imageNum = 1;
-             }
-             showFullImg(imageNum) 
-        }
-    }
+function clamp(num, min, max) {
+  return Math.min(Math.max(num, min), max);
 }
 
-// Clicking on the X button or hitting Escape when the pop-up gallery is being shown, we set it to invisible
-exitBtn.addEventListener('click', event => exitPopUpGallery(event))
-
-document.addEventListener('keydown', event => {
-    if (event.code === "Escape") {
-        exitPopUpGallery(event)
-    }
-})
-
-function exitPopUpGallery(event) {
-    if (popUpGallery.classList.contains("show")) {
-        popUpGallery.classList.remove("show")
-        imageNum = 0;
-    }
+// Load defaults (localStorage -> fallback values)
+function applyStoredDefaults() {
+  selectedTour.value = localStorage.getItem(STORAGE_TOUR_KEY) ?? 'cebu';
+  startingDate.value = localStorage.getItem(STORAGE_DATE_KEY) ?? todayISO();
 }
 
-// Selecting a tour option by clicking 'Apply now" will set the selected tour option in the contact form.
-// And we also save it to the localStorage so if the user refreshes the page, the value won't get lost.
-tours.addEventListener('click', (e) => {
-  const btn = e.target.closest('.tour-btn');
-  if (!btn) return;
+// Show “message sent” banner, then hide it after 5s
+function msgSent() {
+  setTimeout(() => {
+    messageSentMsg.classList.remove('show');
+  }, 5000);
+}
 
-  localStorage.setItem('tour-selected', btn.id);
-  selectedTour.value = btn.id;
-});
+// Mark a field invalid and display message
+function setInvalid(input, message) {
+  const formControl = input.parentElement;
+  const small = formControl.querySelector('small');
+  formControl.classList.add('invalid');
+  small.innerText = message;
+}
 
-// FROM VALIDATION
-form.addEventListener('submit', e => {
-  e.preventDefault();
+// Mark a field valid (remove red state)
+function setValid(input) {
+  const formControl = input.parentElement;
+  formControl.classList.remove('invalid');
+}
 
-  if (isValid()) {
-    messageSentMsg.classList.add("show");
-    msgSent();
-    form.reset();
+function checkEmail(value) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+}
+
+// Validate the date field (used on change + submit)
+function validateDate() {
+  const selected = startingDate.value; // yyyy-mm-dd
+  const today = todayISO();
+
+  if (!selected) {
+    setInvalid(startingDate, 'Please select a date');
+    return false;
   }
-});
 
-// Checking if the user sets the starting date of their booking with a valid date (past dates shouldn't be selected).
-startingDate.addEventListener('change', (e) => {
-  const selectedStartDate = e.target.value; // yyyy-mm-dd
-  const today = new Date().toISOString().split('T')[0];
-
-  if (selectedStartDate < today) {
-    setInvalid(startingDate, 'Please select a date that\'s not in the past');
-    return;
+  if (selected < today) {
+    setInvalid(startingDate, "Please select a date that's not in the past");
+    return false;
   }
 
   setValid(startingDate);
-  localStorage.setItem('starting-date', selectedStartDate);
-});
+  return true;
+}
 
-// So when the page loads, it first checks if there's a selected tour in the localStorage. If there isn't, we set it to the default Cebu tour.
-// We also do the same with the starting date. If there isn't a date saved in localStorage, we set it to the current date.
-selectedTour.value = localStorage.getItem('tour-selected') !== null ? localStorage.getItem('tour-selected') : 'cebu'
-startingDate.value = localStorage.getItem('starting-date') !== null ? localStorage.getItem('starting-date') : (new Date()).toISOString().split('T')[0];
-
+// Validate form fields (used on submit)
 function isValid() {
   let ok = true;
 
   const usernameValue = username.value.trim();
   const emailValue = email.value.trim();
 
-  if (usernameValue === '') {
+  // Name
+  if (!usernameValue) {
     setInvalid(username, 'Please share your name with us');
     ok = false;
   } else {
     setValid(username);
   }
 
-  if (emailValue === '') {
-    setInvalid(email, 'Don\'t forget to add your email address');
+  // Email
+  if (!emailValue) {
+    setInvalid(email, "Don't forget to add your email address");
     ok = false;
   } else if (!checkEmail(emailValue)) {
-    setInvalid(email, 'That doesn\'t quite look like a valid email');
+    setInvalid(email, "That doesn't quite look like a valid email");
     ok = false;
   } else {
     setValid(email);
   }
 
+  // Date
+  if (!validateDate()) ok = false;
+
   return ok;
 }
 
+// === Mobile menu ===
 
-function checkEmail(email) {
-	return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+// Toggle mobile menu open/close
+menuToggler.addEventListener('click', () => {
+  body.classList.toggle('open');
+});
+
+// Close menu when a nav item is clicked (mobile UX)
+navLinks.addEventListener('click', (e) => {
+  // Only close if the click came from a link inside the nav
+  if (!e.target.closest('a')) return;
+  body.classList.remove('open');
+});
+
+// === Gallery popup ===
+
+// Open popup when clicking a gallery image (desktop only)
+imageGallery.addEventListener('click', (e) => {
+  const img = e.target.closest('.image');
+  if (!img) return;
+  if (window.innerWidth < 768) return;
+
+  // ids are like "img1", "img6" -> take the numeric part
+  imageNum = Number(img.id.slice(3));
+  showFullImg(imageNum);
+});
+
+// Show the popup + render selected image
+function showFullImg(num) {
+  popUpGallery.classList.add('show');
+  selectedImg.innerHTML = `<img src="./images/gallery0${num}.jpg" alt="Selected gallery image">`;
+  imgCounter.innerHTML = `${num}/${MAX_IMAGES}`;
 }
 
-// The function receives the field's name and the message accordingly.
-function setInvalid(input, message) {
-    const formControl = input.parentElement;
-    const small = formControl.querySelector('small');
-    formControl.classList.add("invalid");
-    small.innerText = message;
+// Handle next/prev navigation via click or keyboard
+function getImage(event) {
+  if (!popUpGallery.classList.contains('show')) return;
+
+  const nextClicked = event.target?.closest?.('.next-arrow');
+  const prevClicked = event.target?.closest?.('.previous-arrow');
+
+  if (event.code === 'ArrowRight' || nextClicked) {
+    imageNum = clamp(imageNum + 1, 1, MAX_IMAGES);
+    showFullImg(imageNum);
+  }
+
+  if (event.code === 'ArrowLeft' || prevClicked) {
+    imageNum = clamp(imageNum - 1, 1, MAX_IMAGES);
+    showFullImg(imageNum);
+  }
 }
 
-// If every required input field is valid, we let the user know that their booking was successfull.
-function setValid(input) {
-  const formControl = input.parentElement;
-  formControl.classList.remove("invalid");
+popUpGallery.addEventListener('click', getImage);
+document.addEventListener('keydown', getImage);
+
+// Close popup via X button or Escape
+exitBtn.addEventListener('click', exitPopUpGallery);
+document.addEventListener('keydown', (e) => {
+  if (e.code === 'Escape') exitPopUpGallery();
+});
+
+function exitPopUpGallery() {
+  if (!popUpGallery.classList.contains('show')) return;
+
+  popUpGallery.classList.remove('show');
+  imageNum = 0;
 }
 
-// After 5s we remove the message.
-function msgSent() {
-    setTimeout(function(){
-        messageSentMsg.classList.remove("show")
-    }, 5000);
-}
+// === Tours selection -> set select + persist ===
 
+// Clicking "Apply now" sets the select value and saves it
+tours.addEventListener('click', (e) => {
+  const btn = e.target.closest('.tour-btn');
+  if (!btn) return;
+
+  localStorage.setItem(STORAGE_TOUR_KEY, btn.id);
+  selectedTour.value = btn.id;
+});
+
+// === Form validation + submit ===
+
+// Live validate date and persist it if valid
+startingDate.addEventListener('change', () => {
+  if (!validateDate()) return;
+  localStorage.setItem(STORAGE_DATE_KEY, startingDate.value);
+});
+
+// On page load: restore defaults
+applyStoredDefaults();
+
+// Submit: validate, show confirmation, reset, then restore defaults
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  if (!isValid()) return;
+
+  messageSentMsg.classList.add('show');
+  msgSent();
+
+  // Reset form values (this would also reset date/select), so we restore defaults after
+  form.reset();
+  applyStoredDefaults();
+
+  // Clear validation state after successful submission
+  setValid(username);
+  setValid(email);
+  setValid(startingDate);
+});
