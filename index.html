@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Journey Junkies</title>
-    <link rel="icon" type="image/png" href="/images/favicon.ico"/>
+    <link rel="icon" href="images/favicon.ico">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
 </head>
@@ -17,7 +17,7 @@
                     <i class="fas fa-times closing-icon"></i>
                 </div>
                 <div class="brand">
-                    <a href="#" class="nav-logo">Journey Junkies</a>
+                    <a href="#hero" class="nav-logo">Journey Junkies</a>
                 </div>
                 <ul class="nav-links">
                     <li><a href="#about" class="nav-item" >About</a></li>
@@ -92,28 +92,28 @@
         <div class="container">
            <div id="image-gallery">
                 <div class="image-container img-1">
-                    <img src="images/gallery01.jpg" class="image" id="img1">
+                    <img src="images/gallery01.jpg" class="image" id="img1" alt="Patoyo Island">
                 </div>
                 <div class="image-container img-2">
-                    <img src="images/gallery02.jpg" class="image" id="img2">
+                    <img src="images/gallery02.jpg" class="image" id="img2" alt="Sunset photo">
                 </div>
                 <div class="image-container img-3">
-                    <img src="images/gallery03.jpg" class="image" id="img3">
+                    <img src="images/gallery03.jpg" class="image" id="img3" alt="Gallery image 3">
                 </div>
                 <div class="image-container img-4">
-                    <img src="images/gallery04.jpg" class="image" id="img4">
+                    <img src="images/gallery04.jpg" class="image" id="img4" alt="Photo of Chocolate Hills">
                 </div>
                 <div class="image-container img-5">
-                    <img src="images/gallery05.jpg" class="image" id="img5">
+                    <img src="images/gallery05.jpg" class="image" id="img5" alt="Photo of a hotel in Bohol">
                 </div>
                 <div class="image-container img-6">
-                    <img src="images/gallery06.jpg" class="image" id="img6">
+                    <img src="images/gallery06.jpg" class="image" id="img6" alt="Image of palm trees">
                 </div>
                 <div class="image-container img-7">
-                    <img src="images/gallery07.jpg" class="image" id="img7">
+                    <img src="images/gallery07.jpg" class="image" id="img7" alt="Photo of a deserted island">
                 </div>
                 <div class="image-container img-8">
-                    <img src="images/gallery08.jpg" class="image" id="img8">
+                    <img src="images/gallery08.jpg" class="image" id="img8" alt="Underwater photo">
                 </div>
             </div>
         </div>
@@ -173,6 +173,7 @@
                         </ul>
                         <p class="tour-price">$200</p>
                         <a href="#contact" class="tour-btn btn" id="siargao">Apply now</a>
+                    </div>
                 </div>
             </div>
             </div>
@@ -184,22 +185,22 @@
             <div class="testimonial">
                 <div class="testimonial-text-box box1">
                     <p class="testimonial-text">"It's a must for everyone visiting the Philippines."</p>
-                    <img src="./images/profile01.jpg">
+                    <img src="./images/profile01.jpg" alt="Tesimonial image 1">
                     <p class="testimonial-name">@danii.raj</p>
                 </div>
                 <div class="testimonial-text-box box2">
                     <p class="testimonial-text">"The team was super friendly and our accomodation just couldn't get any better."</p>
-                    <img src="./images/profile02.jpg">
+                    <img src="./images/profile02.jpg" alt="Tesimonial image 2">
                     <p class="testimonial-name">@leona_field</p>
                 </div>
                 <div class="testimonial-text-box box3">
                     <p class="testimonial-text">"Great people, great vibes, great memories!"</p>
-                    <img src="./images/profile03.jpg">
+                    <img src="./images/profile03.jpg" alt="Tesimonial image 3">
                     <p class="testimonial-name">@mattthetraveler</p>
                 </div>
                 <div class="testimonial-text-box box4">
                     <p class="testimonial-text">"It's definitely worth the price!"</p>
-                    <img src="./images/profile06.jpg">
+                    <img src="./images/profile06.jpg" alt="Tesimonial image 4">
                     <p class="testimonial-name">@itslilianfro</p>
                 </div>
             </div>
@@ -212,17 +213,17 @@
             <form action="#" id="contact-form">
                 <div class="form-control">
                     <label for="name">Name</label>
-                    <input type="text" id="name">
+                    <input type="text" id="name" name="name">
                     <small>Error message</small>
                 </div>
                 <div class="form-control">
                     <label for="email">Email</label>
-                    <input type="email" id="email">
+                    <input type="email" id="email" name="email">
                     <small>Error message</small>
                 </div>
                 <div class="form-control">
                     <label for="tour-options">Select your tour</label>
-                    <select name="tour-options" id="tour-options">
+                    <select name="tour" id="tour-options">
                         <option value="palawan" class="option">Palawan</option>
                         <option value="cebu" class="option">Cebu</option>
                         <option value="siargao" class="option">Siargao</option>
@@ -230,7 +231,7 @@
                 </div>
                 <div class="form-control">
                     <label for="from-date">When do you want to start your 4 days tour?</label>
-                    <input type="date" id="from-date">
+                    <input type="date" id="from-date" name="fromDate">
                     <small>Error message</small>
                 </div>
                 <div class="form-control">
@@ -249,7 +250,7 @@
     <footer id="footer">
         <div class="container">
             <div class="footer-brand">
-                <a href="#" class="nav-logo-footer">Journey Junkies</a>
+                <a href="#hero" class="nav-logo-footer">Journey Junkies</a>
             </div>
             <div class="social-links">
                 <ul class="social-link-list">
