@@ -144,7 +144,7 @@ imageGallery.addEventListener('click', (e) => {
 // Show the popup + render selected image
 function showFullImg(num) {
   popUpGallery.classList.add('show');
-  selectedImg.innerHTML = `<img src="./images/gallery0${num}.jpg" alt="Selected gallery image">`;
+  selectedImg.innerHTML = `<img src="./images/gallery0${num}.webp" alt="Selected gallery image">`;
   imgCounter.innerHTML = `${num}/${MAX_IMAGES}`;
 }
 
